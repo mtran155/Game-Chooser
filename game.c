@@ -7,10 +7,14 @@
 
 int main(int argc, char const *argv[])
 {
-	char *gameList[] = {"Mass Effect", "FFX", "Tales of Symphonia"};
-	int gameCounter[] = {0,0,0,0,0,0,};
-	int gamePick[] = {0,0,0,0,0,0,};
+	char *List[] = {"Mass Effect", "FFX", "Tales of Symphonia"};
+
+	/***make sure array matches the number of items in list***/
+	int counter[] = {0,0,0,0,0,0}; 
+	int pick[] = {0,0,0,0,0,0};
 	int tieArray[6];
+	/*******************************************************/
+
 	int value, index, max, flag, counter, tie;
 
 	flag = 0;
@@ -20,9 +24,9 @@ int main(int argc, char const *argv[])
 
 		value = index = max = 0;
 
-		for (int i = 0; i < LENGTH(gamePick); ++i){
-			if(gamePick[i] == 10){
-				printf("Game to play is %s\n",gameList[i]);
+		for (int i = 0; i < LENGTH(pick); ++i){
+			if(pick[i] == 10){
+				printf("Game to play is %s\n",List[i]);
 				flag = 1;
 				break;
 			}
@@ -33,21 +37,21 @@ int main(int argc, char const *argv[])
 
 		for (int i = 0; i < 200; ++i){
 			for (int j = 0; j < MAX; ++j){
-				value = rand() % LENGTH(gameList);
+				value = rand() % LENGTH(List);
 			}
 
-			gameCounter[value]++;
+			counter[value]++;
 		}
 
-		for (int i = 0; i < LENGTH(gameCounter); ++i){
-			if(gameCounter[i] == max){
+		for (int i = 0; i < LENGTH(counter); ++i){
+			if(counter[i] == max){
 				tie = 1;
 				counter++;
 				tieArray[counter] = i;
 			}
-			else if(gameCounter[i] > max){
+			else if(counter[i] > max){
 				counter = tie = 0;
-				max = gameCounter[i];
+				max = counter[i];
 				tieArray[counter] = i;
 				index = i;
 			}
@@ -58,17 +62,17 @@ int main(int argc, char const *argv[])
 				value = rand() % (counter + 1);
 			}
 			index = tieArray[value];
-			gamePick[index]++;
+			pick[index]++;
 		}
 		else
-			gamePick[index]++;
+			pick[index]++;
 
-		for (int i = 0; i < LENGTH(gameList); ++i){
-			printf("%s %d/10\n",gameList[i], gamePick[i]);
+		for (int i = 0; i < LENGTH(List); ++i){
+			printf("%s %d/10\n",List[i], pick[i]);
 		}
 
-		for (int i = 0; i < LENGTH(gameCounter); ++i){
-			gameCounter[i] = 0;
+		for (int i = 0; i < LENGTH(counter); ++i){
+			counter[i] = 0;
 		}
 
 		printf("--------------------------------\n");
